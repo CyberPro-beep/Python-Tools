@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
 # Importing the relevant libraries needed for the project
-from socket import *                # For network connections
+from socket import *                # type: ignore # For network connections
 from termcolor import colored       # For colored terminal output
 import optparse                     # For command-line option parsing
-from threading import *             # For threading support
+from threading import *             # type: ignore # For threading support
 import pyfiglet                     # For ASCII art banner
 
 # Print ASCII art banner
@@ -12,6 +12,7 @@ print(pyfiglet.figlet_format("Scooby", font="slant"))
 
 # Function to scan a single port on the target host
 def connScan(target_host, target_port):
+    sock = None
     try:
         sock = socket(AF_INET, SOCK_STREAM)  # Create a TCP socket
         sock.connect((target_host, target_port))  # Attempt to connect to the port
@@ -19,7 +20,8 @@ def connScan(target_host, target_port):
     except:
         print(colored(f"[-] {target_port}/tcp is Closed", "red"))  # Port is closed or unreachable
     finally:
-        sock.close()  # Always close the socket
+        if sock:
+            sock.close()  # Always close the socket
 
 # Function to scan multiple ports on the target host
 def portScan(target_host, target_ports):
