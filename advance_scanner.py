@@ -8,7 +8,7 @@ from threading import *             # type: ignore # For threading support
 import pyfiglet                     # For ASCII art banner
 
 # Print ASCII art banner
-print(pyfiglet.figlet_format("Scooby", font="slant"))
+print(pyfiglet.figlet_format("PortScanner", font="slant"))
 
 # Function to scan a single port on the target host
 def connScan(target_host, target_port):
